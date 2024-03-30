@@ -32,53 +32,42 @@ print(summary_stats_by_species)
 
 # Histogram 
 # I am going to plot Histograms of all the species sepal petal lengths and widths on one diagram in a 2x2 pattern.
-# We can determine the size of our combined figure
+# I want to define the variables and the labels I will use
+variables = ["petal_length", "petal_width", "sepal_length", "sepal_width"]
+labels = ["Petal Length", "Petal Width", "SepalLength", "Sepal Width"]
+# I want each species to be represented by a different color so make a dict with key value pairs
+colors= {'setosa' : 'red', 'versicolor': 'green', 'virginica': 'blue'}
+
+# We can determine the size of our combined figure 12 x 10 inches
 plt.figure(figsize=(12,10))
-# We use plt hist to look at our data frames petal length. 
-# As there are 150 entries of which the square root is about 12 so 12 bins is apropriate (SOURCETHIS)
-# We use an aplha of 0.5 to add some transparancy to the bars and we use an internal color of red with an edge color of black to allow it to stand out.
-# We label this all species so we can differentiate between the different histograms as we build on this.
-# We want this to be the top left subplot
-plt.subplot(221)
-plt.hist(df["petal_length"], bins =12, alpha = 0.5, color= "red", edgecolor= "black", label= "All Species Petal Length")
-# Labels the x axis
-plt.xlabel("Petal Length (cm) ")
-# Labels the y axis
-plt.ylabel("Frequency of Petal Length")
-# Gives histogram a title.
-plt.title("Frequency of Petal Lengths Across All Species")
 
-
-
-
-# We wil repeat for all variables across all the species.
-# Petal width
-# We want this to be the top right subplot
-plt.subplot(222)
-plt.hist(df["petal_width"], bins =12, alpha = 0.5, color= "red", edgecolor= "black", label= "All Species Petal Width")
-plt.xlabel("Petal Width (cm) ")
-plt.ylabel("Frequency of Petal Width")
-plt.title("Frequency of Petal Widths Across All Species")
-
-# Sepal Length
-# We want this to be the bottom left subplot
-plt.subplot(223)
-plt.hist(df["sepal_length"], bins =12, alpha = 0.5, color= "red", edgecolor= "black", label= "All Species Sepal Length")
-plt.xlabel("Sepal Length (cm) ")
-plt.ylabel("Frequency of Sepal Length")
-plt.title("Frequency of Sepal Length Across All Species")
-
-# Sepal Width
-# We want this to be the bottom right subplot
-plt.subplot(224)
-plt.hist(df["sepal_width"], bins =12, alpha = 0.5, color= "red", edgecolor= "black", label= "All Species Sepal Width")
-plt.xlabel("Sepal Width (cm) ")
-plt.ylabel("Frequency of Sepal Width")
-plt.title("Frequency of Sepal Widths Across All Species")
-
-
-# We want to ensure that we do not have overlapping so will use
-plt.tight_layout
-
+# We are going to use a for loop for each variable to detemine the subplots
+# This functions will iterate of the variables and add a counter to i so i is the index of the variable in the list
+for i, variable in enumerate(variables):
+# We create are 2 x 2 plot and as i starts at 0 we need to add one for the first subplot and so on.  
+    plt.subplot(2,2, i + 1)
+    # This for loop goes over each species in the colors dict above
+    for species, color in colors.items():
+# This filters the data frame to include only rows where the species column matches the current speices
+        species_data = df[df['species']== species]
+# The histogram is plotted for the current variable in the current species.
+# As we have 150 data points and sqrt is approx 12 we have 12 bins.
+# Alpha transparency measure makes it easier to see overlapping
+# We are assigning the colors as per species 
+# Edge color black helps it to stand out.
+# Label the historgram bars with the species
+        plt.hist(species_data[variable], bins= 12, alpha = 0.5, color = color, edgecolor= 'black', label=species)
+# Set the x axis label using the label based on the current variabe index
+# Sets the y axis to Frequency
+# Sets a title to each histogram based on the variable.
+    plt.xlabel(f'{labels[i]} (cm)')
+    plt.ylabel("Frequency")
+    plt.title(f'Frequency of {labels[i]} Across Species')
+# Adds legends to subplots
+    plt.legend()
+# Prevents overlapping
+plt.tight_layout()
 plt.show()
+
+
 print("Sanity")
