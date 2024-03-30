@@ -21,6 +21,10 @@ The dataset was published by the Ronald Fisher in 1936 paper "The use of multipl
 This is a classic data set used in statistics and machine learning.
 The data set is in a CSV (Comma seperated value) format
 
+Ideas: Andre to decsribe what petals and sepals are maybe include some images from web in Jupyter Notebook to give some context include images of the different types. 
+
+
+
 References: 
 https://www.angela1c.com/projects/iris_project/the-iris-dataset/
 https://archive.ics.uci.edu/dataset/53/iris
