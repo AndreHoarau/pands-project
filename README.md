@@ -8,6 +8,8 @@ Week 4 Starting 01/05/24: Start to make plots using matplot lib etc. Write in re
 Week 5 Starting 08/05/24: Elaborate on plots make it look nicer. Write explanations and findings from the previous week. 
 Week 6 Starting 15/05/24: Finalise details and submit.
 
+
+Note: I modified the Iris Data set before beggining to work on it. I added sepal_length,sepal_width,petal_length,petal_width,species as a line in order to give the csv rows headers.
 Summary of the Iris Data Set:
 This is a multivariate dataset consisting of 150 entires. The entries are composed of 5 attributes 4 measurements and one class and species of the flower type.
 The 4 measurements include:
