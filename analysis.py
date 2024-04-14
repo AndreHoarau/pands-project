@@ -69,5 +69,31 @@ for i, variable in enumerate(variables):
 plt.tight_layout()
 plt.show()
 
-
+# Scatter plot of each pair of variables.
+# Similar to the above we will plot across the 4 variables seperated by species to start clustering the species into unique variable trends.
+# First need to create a list  of the variables we want but we do not need to analyse the same variables against each other.
+pairs= [('petal_length','petal_width'),('petal_length','sepal_length'), ('petal_length','sepal_width'), ('sepal_length','sepal_width'), ('sepal_length','petal_width'), ('sepal_width','petal_width')  ]
+# This evaluates every possible permutation of unique variable types anaylsed against each other.
+# We want this all on one plot.
+plt.figure(figsize=(11, 16))
+# We want to loop over each pair of variables.
+for i, pair in enumerate(pairs, start=1):
+    plt.subplot(3,2,i)
+# We want to loop over each speices
+    for species, color in colors.items():
+# This will get the data associated with each species
+        species_data = df[df['species'] == species]
+# Create the scatter plot for the data pairs.
+        plt.scatter(species_data[pair[0]], species_data[pair[1]], color=color, label=species)
+ # Add labels and title
+ # Add labels and title
+    plt.xlabel(pair[0])
+    plt.ylabel(pair[1])
+    plt.title(f'Scatter Plot of {pair[0]} vs {pair[1]}')
+    plt.legend()
+    # Show the plot
+    
+plt.subplots_adjust(hspace=0.5)
+plt.tight_layout    
+plt.show()
 print("Sanity")
