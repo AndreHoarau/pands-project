@@ -28,7 +28,9 @@ summary_stats_by_species = grouped_by_species.describe()
 print(summary_stats_by_species)
 # From this one can see where perhaps there are difference between species in terms of which have longer sepals which have longer petals and so on.
 # Andre to do further analysis of above
-
+with open('Statistic_Summary.txt', 'w')as file:
+    file.write(f"{df.describe()},{summary_stats_by_species}")
+    
 
 # Histogram 
 # I am going to plot Histograms of all the species sepal petal lengths and widths on one diagram in a 2x2 pattern.
@@ -55,9 +57,9 @@ for i, variable in enumerate(variables):
 # Alpha transparency measure makes it easier to see overlapping
 # We are assigning the colors as per species 
 # Edge color black helps it to stand out.
-# Label the historgram bars with the species
+# Label the histogram bars with the species
         plt.hist(species_data[variable], bins= 12, alpha = 0.5, color = color, edgecolor= 'black', label=species)
-# Set the x axis label using the label based on the current variabe index
+# Set the x axis label using the label based on the current variable index
 # Sets the y axis to Frequency
 # Sets a title to each histogram based on the variable.
     plt.xlabel(f'{labels[i]} (cm)')
