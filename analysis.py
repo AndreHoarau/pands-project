@@ -30,7 +30,7 @@ print(summary_stats_by_species)
 # Andre to do further analysis of above
 with open('Statistic_Summary.txt', 'w')as file:
     file.write(f"{df.describe()},{summary_stats_by_species}")
-    
+
 
 # Histogram 
 # I am going to plot Histograms of all the species sepal petal lengths and widths on one diagram in a 2x2 pattern.
@@ -72,7 +72,7 @@ plt.tight_layout()
 plt.show()
 
 # Scatter plot of each pair of variables.
-# Similar to the above we will plot across the 4 variables seperated by species to start clustering the species into unique variable trends.
+# Similar to the above we will plot across the 4 variables separated by species to start clustering the species into unique variable trends.
 # First need to create a list  of the variables we want but we do not need to analyse the same variables against each other.
 pairs= [('petal_length','petal_width'),('petal_length','sepal_length'), ('petal_length','sepal_width'), ('sepal_length','sepal_width'), ('sepal_length','petal_width'), ('sepal_width','petal_width')  ]
 # This evaluates every possible permutation of unique variable types anaylsed against each other.
