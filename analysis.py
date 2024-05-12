@@ -15,6 +15,9 @@ import numpy as np
 # Import the norm module to the statistical distribution we will use.
 from scipy.stats import norm
 
+# Import seaborn, a matplotlib library.
+
+import seaborn as sns
 
 # Next we can load the data and refer to it as the data frame df.
 df= pd.read_csv("iris_data.csv")
@@ -98,4 +101,24 @@ for i, pair in enumerate(pairs, start=1):
 plt.subplots_adjust(hspace=0.5)
 plt.tight_layout    
 plt.show()
+
+
+# Seaborn Heat Map
+# Reference: Inspiration for an analysis available at: https://www.kaggle.com/code/rakesh6184/seaborn-plot-to-visualize-iris-data
+# Reference: How to use the seaborn heatmap: https://www.datacamp.com/tutorial/seaborn-heatmaps
+# We iterate over each species in our grouped by species vairable and access the species name and the corresponding data frame. 
+for species, group_df in grouped_by_species:
+# We need to modify the matrix to remove the species strings by only including numbers. 
+    only_number_matrix = group_df.select_dtypes(include="number")
+# We then get the correlation of these variables in each item.
+    correlation_matrix= only_number_matrix.corr()
+# We then adjsut the size of our figure.
+    plt.figure(figsize=(8, 6))
+# Create the heatmap, label the squares and pick a colour palette. 
+    sns.heatmap(correlation_matrix, annot=True, cmap="viridis")
+# Add the titles
+    plt.title(f'Correlation Heatmap for {species}')
+    plt.show()
+
+
 print("Sanity")
