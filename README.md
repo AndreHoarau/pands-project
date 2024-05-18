@@ -46,5 +46,5 @@ Overall this project should exhibit my learning throughout this course whilst al
 ## How to run the notebook:
 Download the file onto your local machine and using Visual studio code open the file folder.
 In the terminal run $python .\analysis.py
-
+The script will generate a txt file and some png files. All corresponding comments on these will be contained within irisdataset.ipynb
 References:
