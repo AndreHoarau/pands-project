@@ -25,8 +25,26 @@ The data set is in a CSV (Comma seperated value) format
 
 Ideas: Andre to decsribe what petals and sepals are maybe include some images from web in Jupyter Notebook to give some context include images of the different types. 
 
+# Programming and Scripting Project
+## Lecturer: Andrew Beatty (andrew.beatty@atu.ie)
+**By Andre Hoarau**
+
+Project Aim: This project aims to investigate the [Fisher's Iris Data Set](https://archive.ics.uci.edu/dataset/53/iris). 
+This repository contains:
+* This README introducing the repository.
+* Jupyter notebook in which there is longer form text of the data set itself and of my comments of my analysis.
+* A python script that end users can run that will output relevant data analysis visualisations and enable for an end user to enter in sepal and petal lengths and widths and be told with a percentage certainty what species of flower this is most likely.
+Overall this project should exhibit my learning throughout this course whilst also mimicking a real life scenario in the workplace.
 
 
-References: 
-https://www.angela1c.com/projects/iris_project/the-iris-dataset/
-https://archive.ics.uci.edu/dataset/53/iris
+## Technologies
+* Python 3.11.5 available [here](https://www.anaconda.com/download)
+* Visual Studio Code available [here](https://code.visualstudio.com/)
+* Note: Installation instructions are included at both addresses.
+
+
+## How to run the notebook:
+Download the file onto your local machine and using Visual studio code open the file folder.
+In the terminal run $python .\analysis.py
+
+References:
