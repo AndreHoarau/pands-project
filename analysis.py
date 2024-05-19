@@ -12,11 +12,7 @@ import matplotlib.pyplot as plt
 # We will use Numpy for numerical operations
 import numpy as np
 
-# Import the norm module to the statistical distribution we will use.
-from scipy.stats import norm
-
 # Import seaborn, a matplotlib library.
-
 import seaborn as sns
 
 # Next we can load the data and refer to it as the data frame df.
@@ -30,6 +26,7 @@ grouped_by_species = df.groupby('species')
 summary_stats_by_species = grouped_by_species.describe()
 
 # Write the full DataFrame descriptions to the file
+# We are formatting out txt file and ensuring that all the data is easy to read in a string.
 with open('Statistic_Summary.txt', 'w') as file:
     file.write("Full Data Description:\n")
     file.write(description.to_string())
@@ -40,7 +37,7 @@ with open('Statistic_Summary.txt', 'w') as file:
 
 # Histogram 
 # I am going to plot Histograms of all the species sepal petal lengths and widths on one diagram in a 2x2 pattern.
-# I want to define the variables and the labels I will use
+# I want to define the variables and the labels I will use.
 variables = ["petal_length", "petal_width", "sepal_length", "sepal_width"]
 labels = ["Petal Length", "Petal Width", "Sepal Length", "Sepal Width"]
 # I want each species to be represented by a different color so make a dict with key value pairs
@@ -49,14 +46,14 @@ colors= {'setosa' : 'red', 'versicolor': 'green', 'virginica': 'blue'}
 # We can determine the size of our combined figure 12 x 10 inches
 plt.figure(figsize=(12,10))
 
-# We are going to use a for loop for each variable to detemine the subplots
+# We are going to use a for loop for each variable to determine the subplots
 # This functions will iterate of the variables and add a counter to i so i is the index of the variable in the list
 for i, variable in enumerate(variables):
 # We create are 2 x 2 plot and as i starts at 0 we need to add one for the first subplot and so on.  
     plt.subplot(2,2, i + 1)
     # This for loop goes over each species in the colors dict above
     for species, color in colors.items():
-# This filters the data frame to include only rows where the species column matches the current speices
+# This filters the data frame to include only rows where the species column matches the current species
         species_data = df[df['species']== species]
 # The histogram is plotted for the current variable in the current species.
 # As we have 150 data points and sqrt is approx 12 we have 12 bins.
@@ -107,9 +104,7 @@ plt.show()
 
 
 # Seaborn Heat Map
-# Reference: Inspiration for an analysis available at: https://www.kaggle.com/code/rakesh6184/seaborn-plot-to-visualize-iris-data
-# Reference: How to use the seaborn heatmap: https://www.datacamp.com/tutorial/seaborn-heatmaps
-# We iterate over each species in our grouped by species vairable and access the species name and the corresponding data frame. 
+# We iterate over each species in our grouped by species variable and access the species name and the corresponding data frame. 
 for species, group_df in grouped_by_species:
 # We need to modify the matrix to remove the species strings by only including numbers. 
     only_number_matrix = group_df.select_dtypes(include="number")
@@ -146,38 +141,16 @@ scaler= StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Debugging code to ensure feature name consistency
-# Check feature names used during fitting the StandardScaler
-print("Feature names used during fitting:", scaler.get_feature_names_out())
-
-# Ensure X_train and X_test are Pandas DataFrames with appropriate column names
-assert isinstance(X_train, pd.DataFrame), "X_train is not a Pandas DataFrame"
-assert isinstance(X_test, pd.DataFrame), "X_test is not a Pandas DataFrame"
-assert set(X_train.columns.tolist()) == set(X_test.columns.tolist()), "Column names of X_train and X_test do not match"
-
-# Check column names of X_train and X_test
-print("Column names of X_train:", X_train.columns.tolist())
-print("Column names of X_test:", X_test.columns.tolist())
-
-# Ensure consistency in feature names
-assert set(X_train.columns.tolist()) == set(scaler.get_feature_names_out()), "Feature names are not consistent"
-
-
 # Scaling normalises the features so they have a mean of 0 and a standard deviation of 1.
 # fit_transform computes the mean and std and then scales the data.
 # transform scales the test set using the mean and std from the training set.
 
-# Ensure x_train and x_test are Pandas DataFrames with appropriate column names
+
+# Ensure X_train and X_test are Pandas DataFrames with appropriate column names
+# This is to try and prevent the warning that is occuring.
 assert isinstance(X_train, pd.DataFrame), "X_train is not a Pandas DataFrame"
 assert isinstance(X_test, pd.DataFrame), "X_test is not a Pandas DataFrame"
 assert set(X_train.columns.tolist()) == set(X_test.columns.tolist()), "Column names of X_train and X_test do not match"
-
-# Check column names of X_train and x_test
-print("Column names of X_train:", X_train.columns.tolist())
-print("Column names of X_test:", X_test.columns.tolist())
-
-# Check feature names used during fitting the StandardScaler
-print("Feature names used during fitting:", scaler.get_feature_names_out())
 
 # Ensure consistency in feature names
 assert set(X_train.columns.tolist()) == set(scaler.get_feature_names_out()), "Feature names are not consistent"
@@ -200,9 +173,6 @@ petal_width = float(input("Enter petal width (cm): "))
 input_data = pd.DataFrame([[sepal_length, sepal_width, petal_length, petal_width]], 
 columns=['sepal_length','sepal_width','petal_length','petal_width'])
 
-# Scale the input data
-input_data_scaled = scaler.transform(input_data)
-predicted_probabilities = clf.predict_proba(input_data_scaled)
 
 
 # Make the prediction
@@ -221,10 +191,3 @@ species_names = ['setosa', 'versicolor', 'virginica']
 for i, prob in enumerate(predicted_probabilities[0]):
 # This then prints species and the probability as a percentage to 2 decimal places.
     print(f"{species_names[i]}: {prob*100:.2f}%")
-
-print(type(X))  # Should be <class 'pandas.core.frame.DataFrame'>
-print(X.columns)  # Should match the feature names used during fitting
-
-
-
-print("Sanity")
